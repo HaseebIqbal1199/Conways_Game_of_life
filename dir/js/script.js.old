@@ -1,0 +1,88 @@
+const container = document.querySelector('.container')
+let cell = null;
+
+let rows = 8;
+let cols = 8;
+
+console.log("Script Initialized ✅")
+let mesh = [
+    // Populate during Runtime
+]
+let next_mesh = [
+
+]
+
+console.log("Populating Ui......")
+for (let i = 0; i < cols; i++) {
+    container.style.width = ((cols + 1) * 57) + "px";
+    container.style.minWidth = ((cols + 1) * 57) + "px";
+    for (let j = 0; j < rows; j++) {
+        container.innerHTML += `<div class="cell"></div>`
+    }
+}
+cell = document.querySelectorAll('.cell')
+
+console.log("Indexing Cells........")
+let counter = 0;
+for (let i = 0; i < rows; i++) {
+    mesh.push([])
+    for (let j = 0; j < cols; j++) {
+        mesh[i].push(cell[counter++])
+    }
+}
+console.log("Cells Indexed Successfully ✅")
+
+mesh[1][2].classList.add('cell_active');
+mesh[2][3].classList.add('cell_active');
+mesh[3][1].classList.add('cell_active');
+mesh[3][2].classList.add('cell_active');
+mesh[3][3].classList.add('cell_active');
+
+
+function copyMesh(a, b) {
+    b.length = 0; // clear the array
+    for (let i = 0; i < rows; i++) {
+        b.push([])
+        for (let j = 0; j < cols; j++) {
+            b[i].push(a[i][j])
+        }
+    }
+}
+
+//scan for live cells
+
+setInterval(() => {
+    copyMesh(mesh, next_mesh);
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            let found = 0;
+            let top = i - 1 < 0 ? 0 : i - 1;
+            let bottom = i + 1 >= rows ? rows - 1 : i + 1;
+            let left = j - 1 < 0 ? 0 : j - 1;
+            let right = j + 1 >= cols ? cols - 1 : j + 1;
+ 
+
+                if(next_mesh[top][j].classList.contains('cell_active')){ found++ }
+                if(next_mesh[bottom][j].classList.contains('cell_active')){ found++ }
+                if(next_mesh[i][left].classList.contains('cell_active')){ found++ }
+                if(next_mesh[i][right].classList.contains('cell_active')){ found++ }
+                if(next_mesh[top][left].classList.contains('cell_active')){ found++ }
+                if(next_mesh[top][right].classList.contains('cell_active')){ found++ }
+                if(next_mesh[bottom][left].classList.contains('cell_active')){ found++ }
+                if(next_mesh[bottom][right].classList.contains('cell_active')){ found++ }
+
+            
+            
+            if (found < 2 || found > 3)
+            {
+                next_mesh[i][j].classList.remove('cell_active')
+            }
+            else if (found == 3) {
+                next_mesh[i][j].classList.add('cell_active')
+            }
+            else{
+                console.log("Found! ", found);
+            }
+        }
+    }
+}, 1000);
