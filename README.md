@@ -45,7 +45,7 @@ A beautiful, interactive implementation of Conway's Game of Life with a modern U
 
 ```bash
 # If using git
-git clone <repository-url>
+git clone https://github.com/HaseebIqbal1199/Conways_Game_of_life.git
 cd "Convoy Game Of Life"
 
 # Open in browser
@@ -188,17 +188,6 @@ Created with ❤️ by Muhammad Haseeb
 - **Inter Font** for beautiful typography
 - **Font Awesome** for the icon set
 - The **open source community** for inspiration
-
-## 🔮 Future Enhancements
-
-- [ ] Pattern library expansion
-- [ ] Save/load game states
-- [ ] Export animations as GIF
-- [ ] Sound effects and music
-- [ ] Advanced pattern editor
-- [ ] Performance optimization for larger grids
-- [ ] Touch gestures for mobile
-- [ ] Keyboard navigation support
 
 ---
 
